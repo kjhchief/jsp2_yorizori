@@ -41,6 +41,7 @@ public class JdbcMemberDao implements MemberDao {
 			con.commit();
 		} catch (SQLException e) {
 			con.rollback();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if (pstmt != null) pstmt.close();
