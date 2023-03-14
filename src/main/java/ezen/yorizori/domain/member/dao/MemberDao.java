@@ -14,7 +14,7 @@ public interface MemberDao {
 	// 회원 가입
 	public void create(Member member) throws SQLException;
 	// 회원 인증 (리턴 때 회원 정보 같은거 다같이 담으라고 Member 타입으로 받는다.)
-	public Member isMember(Member member) throws SQLException;
+	public Member isMember(String id, String password) throws SQLException;
 	// 회원 목록 조회
 	public List<Member> findAll() throws SQLException;
 	// 회원 상세 정보

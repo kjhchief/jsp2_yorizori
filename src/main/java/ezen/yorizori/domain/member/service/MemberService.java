@@ -11,10 +11,10 @@ import ezen.yorizori.domain.member.dto.Member;
  */
 public interface MemberService {
 	// 회원 등록
-	public void registerMember(Member member) throws Exception;
+	public void registerMember(Member member) throws RuntimeException;
 	// 회원 전체 조회
-	public List<Member> getMembers() throws Exception;
+	public List<Member> getMembers() throws RuntimeException;
 	// 회원인증
-	public Member isMember(String id, String password) throws Exception;
+	public Member isMember(String id, String password) throws RuntimeException;
 
 }

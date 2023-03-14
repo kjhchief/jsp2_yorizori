@@ -41,12 +41,12 @@ public class JdbcMemberDao implements MemberDao {
 			con.commit();
 		} catch (SQLException e) {
 			con.rollback();
-			throw new RuntimeException(e.getMessage());
+			throw e; // 호출한 쪽에 그대로 던져준다. 휙~
 		} finally {
 			try {
 				if (pstmt != null) pstmt.close();
 				// 사용 후 커넥션 반납 (닫는 것 아님. 반납임!)
-				if(con == null) con.close();
+				if(con != null) con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,7 +56,7 @@ public class JdbcMemberDao implements MemberDao {
 	}
 
 	@Override
-	public Member isMember(Member member) throws SQLException {
+	public Member isMember(String id, String password) throws SQLException {
 		Member loginMember = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -68,21 +68,21 @@ public class JdbcMemberDao implements MemberDao {
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sb.toString());
-			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getPassword());
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				loginMember = makeMember(rs);
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		} /*
+			 * catch (SQLException e) { e.printStackTrace(); } 캐치는 생략 가능
+			 */ finally {
 			try {
 				if (rs != null) rs.close();
 				if (pstmt != null) pstmt.close();
-				if(con == null) con.close();
+				if(con != null) con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,13 +113,13 @@ public class JdbcMemberDao implements MemberDao {
 				list.add(member);
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		} /*
+			 * catch (SQLException e) { e.printStackTrace(); }
+			 */ finally { // finally 쓰는 이유는 얘네들 닫아주기 위해서.
 			try {
 				if (rs != null) rs.close();
 				if (pstmt != null) pstmt.close();
-				if(con == null) con.close();
+				if(con != null) con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -182,10 +182,7 @@ public class JdbcMemberDao implements MemberDao {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //		MemberRepository repository = new JdbcMemberRepository();
 		MemberDao dao = DaoFactory.getInstance().getMemberDao();
-		Member member = new Member();
-		member.setId("kjh");
-		member.setPassword("1111");
-		Member loginMember = dao.isMember(member);
+		Member loginMember = dao.isMember("tester", "1111");
 		// 비회원인 경우
 		if (loginMember == null) {
 			System.out.println("회원이 아닙니다.");
@@ -198,8 +195,8 @@ public class JdbcMemberDao implements MemberDao {
 		System.out.println(list);
 		
 		// 특정 회원 정보 조회
-		Member member2 = ((JdbcMemberDao) dao).getMember("bangry");
-		System.out.println(member2);
+		Member member = ((JdbcMemberDao) dao).getMember("bangry");
+		System.out.println(member);
 
 	}
 

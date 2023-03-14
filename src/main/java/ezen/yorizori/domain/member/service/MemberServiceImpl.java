@@ -20,22 +20,34 @@ public class MemberServiceImpl implements MemberService {
 //	private MemberDao memberDao = new APIMemberDao();
 
 	@Override
-	public void registerMember(Member member) throws Exception {
-		memberDao.create(member);
+	public void registerMember(Member member) throws RuntimeException {
+		try {
+			memberDao.create(member);
+		} catch (SQLException e) {
+			// 컴파일 예외를 런타임 예외로 변환해줌 (먼말임?)
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 	@Override
-	public List<Member> getMembers() throws Exception {
-		return memberDao.findAll();
+	public List<Member> getMembers() throws RuntimeException {
+		List<Member> list = null;
+		try {
+			list = memberDao.findAll();
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return list;
 	}
 
 	@Override
-	public Member isMember(String id, String password) throws Exception {
-		Member member = new Member();
-		member.setId(id);
-		member.setPassword(password);
-
-		member = memberDao.isMember(member);
+	public Member isMember(String id, String password) throws RuntimeException {
+		Member member = null;
+		try {
+			member = memberDao.isMember(id, password);
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		return member;
 	}
 }

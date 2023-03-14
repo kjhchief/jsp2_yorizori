@@ -61,14 +61,10 @@ public class RegisterController extends HttpServlet {
 		member.setEmail(email);
 		member.setAge(age);
 		
-		try {
-			memberService.registerMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		memberService.registerMember(member);
 		
 		// 정상 등록이 완료 되면 로그인 화면 페이지 JSP로 SendRedirect 
-		response.sendRedirect("/member/loginup.do");
+		response.sendRedirect("/member/login.do");
 	}
 
 }

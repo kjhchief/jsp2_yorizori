@@ -18,7 +18,7 @@
 
 <body>
   <%-- Navigation--%>
-  <jsp:include page="/include/nav.jsp" />
+  <jsp:include page="/WEB-INF/views/include/nav.jsp" />
 
   <%-- Section--%>
   <section class="py-5">
@@ -86,7 +86,7 @@
 
   </section>
   <%-- Footer--%>
-  <jsp:include page="/include/footer.jsp" />
+  <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
   <!-- Bootstrap core JS-->
   <script
