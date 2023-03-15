@@ -52,21 +52,12 @@
           <tbody>
             <c:forEach items="${requestScope.list }" var="member">
               <tr>
-                <td><a href="#">${member.id }</a></td>
+                <td><a href="/member/detail.do?id=${member.id }">${member.id }</a></td>
                 <td>${member.name }</td>
                 <td><a href="mailto:${member.email }">${member.email }</a></td>
                 <td>${member.regdate }</td>
               </tr>
             </c:forEach>
-
-
-
-            <tr>
-              <td><a href="#">bangry</a></td>
-              <td>김기정</td>
-              <td><a href="mailto:bangry@gmail.com">bangry@gmail.com</a></td>
-              <td>2020-03-13 12:00:00</td>
-            </tr>
           </tbody>
         </table>
       </div>

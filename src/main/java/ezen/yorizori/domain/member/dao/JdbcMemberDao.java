@@ -26,7 +26,8 @@ public class JdbcMemberDao implements MemberDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append(" INSERT INTO member").append(" VALUES(?, ?, ?, ?, ?, SYSDATE)");
+		sb.append(" INSERT INTO member")
+		.append(" VALUES(?, ?, ?, ?, ?, SYSDATE)");
 		try {
 			// 커넥션을 풀링하고 있는 커넥션 팩토리로부터 사용하지 않고 있는 커넥션 획득
 			con = dataSource.getConnection();

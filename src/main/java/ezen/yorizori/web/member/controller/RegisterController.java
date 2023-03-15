@@ -65,6 +65,7 @@ public class RegisterController extends HttpServlet {
 		
 		// 정상 등록이 완료 되면 로그인 화면 페이지 JSP로 SendRedirect 
 		response.sendRedirect("/member/login.do");
+		
 	}
 
 }

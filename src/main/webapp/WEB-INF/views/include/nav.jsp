@@ -14,7 +14,7 @@
         <li class="nav-item"><a class="nav-link active"
           aria-current="page" href="#">HOME</a></li>
         <li class="nav-item"><a class="nav-link" href="">요리책 목록</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">요리책 등록</a></li>
+        <li class="nav-item"><a class="nav-link" href="/cookbook/regist.do">요리책 등록</a></li>
         <li class="nav-item"><a class="nav-link" href="/member/list.do">회원 목록</a></li>
       </ul>
       

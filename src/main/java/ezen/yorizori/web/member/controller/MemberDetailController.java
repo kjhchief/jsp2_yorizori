@@ -19,8 +19,8 @@ import ezen.yorizori.web.common.YZRuntimeException;
 /**
  * 회원 목록 요청 처리
  */
-@WebServlet("/member/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/member/detail.do")
+public class MemberDetailController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,25 +30,22 @@ public class ListController extends HttpServlet {
 	/**
 	 * 회원 목록 처리
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인 사용자인 경우 서비스
-		// 만약 비로그인인 경우 안내메세지 출력
-		HttpSession session= request.getSession();
+	// 회원 상세
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");	
+		String id = req.getParameter("id");
+		
+		HttpSession session= req.getSession();
 		Member member = (Member) session.getAttribute("loginMember");
-		// 로그인중
+		
 		if(member != null) {
-			List<Member> list= memberService.getMembers();
-			request.setAttribute("list", list);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/views/member/list.jsp");
-			rd.forward(request, response);	
+			member = memberService.getMember(id);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/views/member/memberDetail.jsp");
+			rd.forward(req, resp);	
 		}else {
-			throw new YZRuntimeException("회원목록은 로그인된 사용자만 접근할 수 있습니다.", "/member/list.do");
+			throw new YZRuntimeException("회원상세는 로그인된 사용자만 접근할 수 있습니다.", "/member/detail.do");
 		}
-		
-		
 	}
-	
-
-	
 
 }

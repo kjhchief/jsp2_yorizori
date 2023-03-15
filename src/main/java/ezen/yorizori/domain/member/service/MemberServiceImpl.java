@@ -1,6 +1,10 @@
 package ezen.yorizori.domain.member.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import ezen.yorizori.domain.common.factory.DaoFactory;
@@ -49,5 +53,17 @@ public class MemberServiceImpl implements MemberService {
 			throw new RuntimeException(e.getMessage());
 		}
 		return member;
+	}
+	
+	public Member getMember(String userId) throws RuntimeException {
+		Member member = null;
+		try {
+			member = memberDao.getMember(userId);
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		return member;
+				
 	}
 }

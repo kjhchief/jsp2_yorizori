@@ -8,6 +8,8 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import ezen.yorizori.domain.cookbook.dao.CookbookDao;
+import ezen.yorizori.domain.cookbook.dao.JdbcCookbookDao;
 import ezen.yorizori.domain.member.dao.JdbcMemberDao;
 import ezen.yorizori.domain.member.dao.MemberDao;
 
@@ -62,6 +64,11 @@ public class DaoFactory{
 		// 리턴 하면서 데이터 소스까지 같이 준다. 
 		return new JdbcMemberDao(dataSource);
 //		return new MybatisMemberRepository(dataSource);
+	}
+	
+	public CookbookDao getCookbookDao() {
+		// 리턴 하면서 데이터 소스까지 같이 준다. 
+		return new JdbcCookbookDao(dataSource);
 	}
 	
 	/*
