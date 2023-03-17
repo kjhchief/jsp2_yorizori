@@ -14,6 +14,19 @@
   rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
+<script>
+  let idCheck = 0;
+  
+  function checkId(){
+    if(inputId === database && inputId ===""){
+      idCheck = 0;
+    }else(inputId !== databse){
+      idCheck = 1;
+    }
+  }
+
+</script>
+
 </head>
 
 <body>
