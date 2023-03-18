@@ -167,6 +167,11 @@ public class JdbcMemberDao implements MemberDao {
 		return member;
 		
 	}
+	
+	public int checkId(String userId) throws SQLException{
+		return 0;
+		
+	}
 
 	// 헬퍼 메소드
 	private Member makeMember(ResultSet rs) throws SQLException {

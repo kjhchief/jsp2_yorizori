@@ -19,7 +19,8 @@ public interface MemberDao {
 	public List<Member> findAll() throws SQLException;
 	// 회원 상세 정보
 	public Member getMember(String userId) throws SQLException;
-	
+	// 회원 아이디 중복 확인
+	public int checkId(String userId) throws SQLException;
 	// 회원 삭제
 	// 회원 정보 수정
 	// 
