@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
 			member = memberDao.isMember(id, password);
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage());
-		}
+		} 
 		return member;
 	}
 	
@@ -65,5 +65,17 @@ public class MemberServiceImpl implements MemberService {
 		
 		return member;
 				
+	}
+	
+	public int checkIdService(String id) throws RuntimeException {
+		int chkId = 0;
+		try {
+			chkId = memberDao.checkId(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return chkId;
 	}
 }

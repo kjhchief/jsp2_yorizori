@@ -25,6 +25,14 @@
     }
   }
 
+  function requestUserList() {
+
+fetch("checkId.do")
+  .then(response => response.json()) 
+  .then(() => checkId()) 
+  .catch(error => showMessage(error))
+}
+
 </script>
 
 </head>

@@ -19,5 +19,7 @@ public interface MemberService {
 	public Member isMember(String id, String password) throws RuntimeException;
 	// 회원상세
 	public Member getMember(String userId) throws RuntimeException;
+	// 아이디 중복 체크
+	public int checkIdService(String id) throws RuntimeException;
 
 }

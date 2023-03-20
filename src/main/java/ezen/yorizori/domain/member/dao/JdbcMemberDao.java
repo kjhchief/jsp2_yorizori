@@ -169,7 +169,41 @@ public class JdbcMemberDao implements MemberDao {
 	}
 	
 	public int checkId(String userId) throws SQLException{
-		return 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT member_id")
+		.append(" FROM member")
+		.append(" WHERE member_id=?");
+		
+		int idCheck = 0;
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sb.toString());
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				idCheck = 0;
+				System.out.println("아이디 중복됨");
+			}else {
+				idCheck = 1;
+				System.out.println("아이디 안 중복");
+			}
+
+		}finally { // finally 쓰는 이유는 얘네들 닫아주기 위해서.
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return idCheck;
 		
 	}
 
